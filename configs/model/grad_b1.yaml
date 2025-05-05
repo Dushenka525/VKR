@@ -1,0 +1,4 @@
+type_model: GradientBoost
+n_estimators: 1000
+learning_rate: 0.1 
+max_depth: 3
