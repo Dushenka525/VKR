@@ -1,4 +1,4 @@
-raw_data_path: data/raw/merged_gen_v4.csv
+raw_data_path: data/raw/ubend_gen_v4.csv
 params_ranges:
   B4toD4: [0.005,0.02, 0.1]
   B5toB4: [1.0,1.25, 1.5]
