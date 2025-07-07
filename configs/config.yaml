@@ -1,5 +1,5 @@
 defaults:
-- data: base
-# - model: grad_b1
-- train: train_v2
+- data: ubend_3888
+- model: gpr_naqbc1
+- train: train_v1
 # - mlflow: base

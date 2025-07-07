@@ -28,11 +28,10 @@ def make_dataset(cfg : DictConfig) -> None:
         data_config.normalized_data_path,
         data_config.train_data_path,
         data_config.val_data_path,
-        data_config.test_data_path,
         data_config.val_size,
-        data_config.test_size,
     )
     return None
+
 
 def normalize_features(
     raw_data_path: str,
@@ -40,15 +39,14 @@ def normalize_features(
     normalized_data_path: str,
 ) -> None:
     df = pd.read_csv(raw_data_path)
-    def processing(df):
-        for i in df.columns:
-            if df[i].dtype is not np.float64:
-                df[i] = df[i].astype(np.float64)
-        scaler = MinMaxScaler()
-        # Fit and transform the data
-        d_f = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
-        return d_f
-    df = processing(df)
+
+    def normalize(value: float, vmin: float, vmax: float) -> float:
+        return 2 * (value - vmin) / (vmax - vmin) - 1
+
+    for param, value in params_ranges.items():
+        vmin, vmax = value
+        df[param] = df[param].apply(lambda x: normalize(x, vmin, vmax))
+
     df.to_csv(normalized_data_path, index=False)
     return None
 
@@ -57,17 +55,10 @@ def split_data(
     raw_data_path: str,
     train_data_path: str,
     val_data_path: str,
-    test_data_path: str,
     val_size: float,
-    test_size: float,
     random_state: int = 1234,
 ) -> None:
     df = pd.read_csv(raw_data_path)
-    train_df, test_df = train_test_split(
-        df,
-        test_size=test_size,
-        random_state=random_state,
-    )
     train_df, val_df = train_test_split(
         df,
         test_size=val_size,
@@ -75,29 +66,9 @@ def split_data(
     )
     train_df.to_csv(train_data_path, index=False)
     val_df.to_csv(val_data_path, index=False)
-    test_df.to_csv(test_data_path, index=False)
     return None
 
 
 if __name__ == "__main__":
     make_dataset()
 
-# with open('configs/data/merged_gen_v4.yaml', 'r') as file:
-#     templates = yaml.safe_load(file)
-
-# print(templates)
-# print(templates['raw_data_path'])
-
-# df = pd.read_csv(templates['raw_data_path'])
-
-# print(df.columns)
-# for i in df.columns:
-#     if df[i].dtype is not np.float64:
-#         df[i] = df[i].astype(np.float64)
-
-# print(df)
-# scaler = MinMaxScaler()
-# # Fit and transform the data
-# df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
-
-# print(df)

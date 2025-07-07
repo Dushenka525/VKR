@@ -9,3 +9,8 @@ model:
  max_depth: 3
 experiment_name: train_baselines
 model_info_dir: models/baseline
+# model:
+#  n_estimators: 1000
+#  criterion: absolute_error
+#  max_depth: 3
+#  kernel: RBF

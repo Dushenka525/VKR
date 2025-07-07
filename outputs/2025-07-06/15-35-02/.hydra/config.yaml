@@ -1,0 +1,43 @@
+data:
+  raw_data_path: data/raw/ubend_gen_v4.csv
+  params_ranges:
+    B4TOD4:
+    - 0.005
+    - 0.1
+    B5TOB4:
+    - 1.0
+    - 1.5
+    R45TOB4:
+    - 0.9
+    - 5.0
+    OMEGA5:
+    - -5.0
+    - 5.0
+    GAMMAU:
+    - -0.5
+    - 0.5
+    ALPHA4:
+    - 10.0
+    - 60.0
+    RE:
+    - 100000
+    - 500000
+  normalized_data_path: data/processed/norm_ubend_gen_v4.csv
+  train_data_path: data/processed/train_ubend_gen_v4.csv
+  val_data_path: data/processed/val_ubend_gen_v4.csv
+  test_data_path: data/processed/test_ubend_gen_v4.csv
+  val_size: 0.2
+  test_size: 0.2
+model:
+  type_model: GradientBoost
+  parameters:
+    n_estimators: 1000
+    learning_rate: 0.05
+    max_depth: 4
+  model_info_dir: models
+train:
+  train_data_path: data/processed/train_ubend_gen_v4.csv
+  val_data_path: data/processed/val_ubend_gen_v4.csv
+  test_data_path: data/processed/test_ubend_gen_v4.csv
+  experiment_name: train_baselines
+  model_info_dir: models/baseline

@@ -1,0 +1,2 @@
+[2025-07-06 15:03:47,853][git.cmd][INFO] - Ignored error after process had died: OSError(9, 'Неверный дескриптор', None, 6, None)
+[2025-07-06 15:03:47,863][git.cmd][INFO] - Ignored error after process had died: OSError(9, 'Неверный дескриптор', None, 6, None)
